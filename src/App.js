@@ -5,7 +5,7 @@ import * as ReactBootStrap from "react-bootstrap";
 
 const App = () => {
   const states = [
-    { state: "Hyderabad", ruler: "Osman Ali Khan", year: "1936" },
+    { state: "Hyderabad", ruler: "Asif Jah VII", year: "1936" },
     { state: "Mysore", ruler: "Krishnaraja Wadiyar IV", year: "1936" },
     { state: "Bikaner", ruler: "Ganga Singh", year: "1936" },
   ];
