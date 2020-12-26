@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-import { PrincelyState } from "./components/princely_state";
+import { PrincelyState } from "./components/princely-state";
 
 const App = () => {
   return (
