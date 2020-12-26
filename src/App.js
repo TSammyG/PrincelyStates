@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
 
-import { PrincelyState } from "./components/princely-state";
+import { PrincelyStateTable } from "./components/princely-state-table";
 
 const App = () => {
   return (
     <div className="App">
-      <PrincelyState/>
+      <PrincelyStateTable/>
     </div>
   );
 };

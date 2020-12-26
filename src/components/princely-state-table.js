@@ -1,5 +1,6 @@
 import React from "react";
 import * as ReactBootStrap from "react-bootstrap";
+import { PrincelyStateWindow } from "./princely-state-window";
 
 const stateHeaders = [
   "State",
@@ -13,12 +14,26 @@ const states = [
   { state: "Bikaner", ruler: "Ganga Singh", year: "1936" },
 ];
 
-export class PrincelyState extends React.Component {
+export class PrincelyStateTable extends React.Component {
+  state = {
+    seen: false
+  };
+
+  togglePop = () => {
+    this.setState({
+      seen: !this.state.seen
+    });
+  };
+
+  map_to_record(value) {
+    return <td>{ value }</td>;
+  }
+
   make_header() {
     return (
       <thead>
       <tr>
-        { stateHeaders.map(header => <td>{ header }</td>) }
+        { stateHeaders.map(this.map_to_record) }
       </tr>
       </thead>
     );
@@ -27,8 +42,9 @@ export class PrincelyState extends React.Component {
   make_body(states) {
     const renderState = (state, index) => {
       return (
-        <tr key={ index }>
-          { Object.values(state).map(state_value => <td>{ state_value }</td>) }
+        <tr key={ index } onClick={ this.togglePop }>
+          { Object.values(state).map(this.map_to_record) }
+          {this.state.seen ? <PrincelyStateWindow toggle={this.togglePop}/> : null}
         </tr>
       );
     };
