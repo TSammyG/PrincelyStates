@@ -1,6 +1,6 @@
 import React from "react";
 import * as ReactBootStrap from "react-bootstrap";
-import { PrincelyStateTableEntry } from "./princely-state-table-entry";
+import { PSTableEntry } from "./PSTableEntry";
 
 const stateHeaders = ["State", "Ruling Prince", "Year"];
 
@@ -14,7 +14,7 @@ const stateInfo = [
   { stateName: "Bikaner", stateRuler: "Ganga Singh", stateYear: "1936" },
 ];
 
-export class PrincelyStateTable extends React.Component {
+export class PSTable extends React.Component {
   make_table_entry(value, index) {
     return <td key={ index }>{ value }</td>;
   }
@@ -31,10 +31,10 @@ export class PrincelyStateTable extends React.Component {
 
   make_body(stateInfos) {
     const stateEntries = stateInfos.map((state, index) => {
-      return <PrincelyStateTableEntry key={ index }
-                                      propKey={ index }
-                                      stateValues={ Object.values(state) }
-                                      description={ "FUCK" }/>;
+      return <PSTableEntry key={ index }
+                           propKey={ index }
+                           stateValues={ Object.values(state) }
+                           description={ "FUCK" }/>;
     });
 
     return <tbody>{ stateEntries }</tbody>;

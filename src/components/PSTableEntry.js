@@ -1,6 +1,6 @@
 import React from "react";
 
-export class PrincelyStateTableEntry extends React.Component {
+export class PSTableEntry extends React.Component {
   state = {
     isInteractedWith: false,
   };
