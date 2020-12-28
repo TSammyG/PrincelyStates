@@ -12,11 +12,14 @@ export class PSTableEntry extends React.Component {
   };
 
   show_state_table_information() {
-    return this.props.stateValues.map((state, index) => <td key={ index }>{ state }</td>);
+    return this.props.stateValues.map((state, index) => {
+      return <td key={ index }>{ state }</td>;
+    });
   }
 
   show_state_detailed_description() {
-    return <td colSpan={ "3" } key={ Math.floor(Math.random() * 100000) + 1 }>{ this.props.description }</td>;
+    const rng = Math.floor(Math.random() * 100000) + 1;
+    return <td colSpan={ "3" } key={ rng }>{ this.props.description }</td>;
   }
 
   render() {
