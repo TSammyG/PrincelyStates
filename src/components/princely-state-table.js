@@ -2,61 +2,82 @@ import React from "react";
 import * as ReactBootStrap from "react-bootstrap";
 import { PrincelyStateWindow } from "./princely-state-window";
 
-const stateHeaders = [
-  "State",
-  "Ruling Prince",
-  "Year",
-];
+const stateHeaders = ["State", "Ruling Prince", "Year"];
 
-const states = [
-  { state: "Hyderabad", ruler: "Asif Jah VII", year: "1936" },
-  { state: "Mysore", ruler: "Krishnaraja Wadiyar IV", year: "1936" },
-  { state: "Bikaner", ruler: "Ganga Singh", year: "1936" },
+const stateInfo = [
+  { stateName: "Hyderabad", stateRuler: "Asif Jah VII", stateYear: "1936" },
+  {
+    stateName: "Mysore",
+    stateRuler: "Krishnaraja Wadiyar IV",
+    stateYear: "1936",
+  },
+  { stateName: "Bikaner", stateRuler: "Ganga Singh", stateYear: "1936" },
 ];
 
 export class PrincelyStateTable extends React.Component {
   state = {
-    seen: false
+    isInteractedWith: false,
   };
 
-  togglePop = () => {
+  toggleInteractionStatus = () => {
     this.setState({
-      seen: !this.state.seen
+      isInteractedWith: !this.state.isInteractedWith,
     });
   };
 
-  map_to_record(value) {
-    return <td>{ value }</td>;
+  make_table_entry(value, index) {
+    return <td key={index}>{value}</td>;
   }
 
   make_header() {
     return (
       <thead>
-      <tr>
-        { stateHeaders.map(this.map_to_record) }
-      </tr>
+        <tr>{stateHeaders.map(this.make_table_entry)}</tr>
       </thead>
     );
   }
 
-  make_body(states) {
-    const renderState = (state, index) => {
-      return (
-        <tr key={ index } onClick={ this.togglePop }>
-          { Object.values(state).map(this.map_to_record) }
-          {this.state.seen ? <PrincelyStateWindow toggle={this.togglePop}/> : null}
+  show_info(state, index) {
+    let fragment;
+
+    if (this.state.isInteractedWith) {
+      fragment = (
+        <tr key={index} onClick={this.toggleInteractionStatus}>
+          <td></td>
+          {this.make_table_entry(
+            //NB: This toggle property links with line 6's properties object in princely-state-window
+            <PrincelyStateWindow
+              toggle={this.toggleInteractionStatus}
+              description={"FUCK"}
+            />
+          )}
+          <td></td>
         </tr>
       );
+    } else {
+      fragment = (
+        <tr key={index} onClick={this.toggleInteractionStatus}>
+          {Object.values(state).map(this.make_table_entry)}
+        </tr>
+      );
+    }
+
+    return fragment;
+  }
+
+  make_body(states) {
+    const renderState = (state, index) => {
+      return this.show_info(state, index);
     };
-    return <tbody>{ states.map(renderState) }</tbody>;
+    return <tbody>{states.map(renderState)}</tbody>;
   }
 
   render() {
     return (
       <div className="princely-state">
         <ReactBootStrap.Table striped bordered hover>
-          { this.make_header() }
-          { this.make_body(states) }
+          {this.make_header()}
+          {this.make_body(stateInfo)}
         </ReactBootStrap.Table>
       </div>
     );
