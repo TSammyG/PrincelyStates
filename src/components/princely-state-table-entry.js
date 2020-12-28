@@ -11,12 +11,12 @@ export class PrincelyStateTableEntry extends React.Component {
     });
   };
 
-  show_state_information(states) {
-    return states.map(state => <td>{ state }</td>);
+  show_state_table_information() {
+    return this.props.stateValues.map((state, index) => <td key={ index }>{ state }</td>);
   }
 
-  show_state_description(description) {
-    return <td colSpan={ "3" }>{ description }</td>;
+  show_state_detailed_description() {
+    return <td colSpan={ "3" } key={ Math.floor(Math.random() * 100000) + 1 }>{ this.props.description }</td>;
   }
 
   render() {
@@ -24,8 +24,8 @@ export class PrincelyStateTableEntry extends React.Component {
       <tr key={ this.props.propKey } onClick={ this.toggleInteractionStatus }>
         {
           this.state.isInteractedWith ?
-            this.show_state_description(this.props.description) :
-            this.show_state_information(this.props.states)
+            this.show_state_detailed_description() :
+            this.show_state_table_information()
         }
       </tr>
     );

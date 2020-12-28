@@ -22,15 +22,18 @@ export class PrincelyStateTable extends React.Component {
   make_header() {
     return (
       <thead>
-      <tr>{ stateHeaders.map(this.make_table_entry) }</tr>
+      <tr>
+        { stateHeaders.map(this.make_table_entry) }
+      </tr>
       </thead>
     );
   }
 
-  make_body(states) {
-    const stateEntries = states.map((state, index) => {
-      return <PrincelyStateTableEntry propKey={ index }
-                                      states={ Object.values(state) }
+  make_body(stateInfos) {
+    const stateEntries = stateInfos.map((state, index) => {
+      return <PrincelyStateTableEntry key={ index }
+                                      propKey={ index }
+                                      stateValues={ Object.values(state) }
                                       description={ "FUCK" }/>;
     });
 
